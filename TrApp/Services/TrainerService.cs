@@ -1,4 +1,5 @@
-﻿using TrApp.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using TrApp.Models;
 using TrApp.RepositoryContracts;
 using TrApp.ServiceContracts;
 
@@ -9,7 +10,7 @@ namespace TrApp.Services
     {
         private readonly ITrainerRepository _trainerRepository;
 
-        public TrainerService(ITrainerRepository trainerRepository)
+        public TrainerService(ITrainerRepository trainerRepository, UserManager<IdentityUser> userManager)
         {
             _trainerRepository = trainerRepository;
         }

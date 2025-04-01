@@ -13,7 +13,9 @@ namespace TrApp.Identity
         }
 
         public virtual DbSet<Trainer> Trainers { get; set; }
-        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Trainee> Trainees { get; set; }
+        public virtual DbSet<Exercise> Exercises { get; set; }
+        public virtual DbSet<TrainingPlan> TrainingPlans { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

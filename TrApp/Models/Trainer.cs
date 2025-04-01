@@ -6,7 +6,7 @@ namespace TrApp.Models
     {
         [Key]
         public Guid Id { get; private set; }
-        public IEnumerable<Client>? clients { get; set; }
+        public IEnumerable<Trainee>? clients { get; set; }
 
         private Trainer() { }
         public Trainer(Guid id)

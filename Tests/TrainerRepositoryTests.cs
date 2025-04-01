@@ -81,7 +81,7 @@ namespace Tests
             Trainer trainer = await _trainerService.CreateTrainerAsync(id);
             var result = await _trainerService.DeleteTrenerAsync(trainer.Id);
             Assert.True(result);
-            await Assert.ThrowsAsync<ArgumentException>(async () =>await  _trainerService.FindTrainerByIdAsync(trainer.Id));
+            await Assert.ThrowsAsync<ArgumentException>(async () => await  _trainerService.FindTrainerByIdAsync(trainer.Id));
         }
     }
 }

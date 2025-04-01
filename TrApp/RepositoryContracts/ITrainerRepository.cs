@@ -6,7 +6,6 @@ namespace TrApp.RepositoryContracts
     {
         public Task<Trainer> AddTrainerAsync(Guid trainerId);
         public Task<bool> DeleteTrainerAsync(Guid trainerId);
-
         public Task<Trainer?> FindTrainerById(Guid trainerId);
     }
 }
