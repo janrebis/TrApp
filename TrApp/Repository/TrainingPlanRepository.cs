@@ -1,4 +1,5 @@
-﻿using TrApp.Identity;
+﻿using Microsoft.EntityFrameworkCore;
+using TrApp.Identity;
 using TrApp.Models;
 using TrApp.RepositoryContracts;
 
@@ -27,9 +28,9 @@ namespace TrApp.Repository
             return true;
         }
 
-        public async Task<TrainingPlan> GetTrainingPlanByIdAsync(Guid trainingPlanId)
+        public async Task<List<TrainingPlan>> GetTrainingPlanByTraineeIdAsync(Guid traineeId)
         {
-            TrainingPlan? trainingPlan = await _dbContext.TrainingPlans.FindAsync(trainingPlanId);
+            List<TrainingPlan> ? trainingPlan = await _dbContext.TrainingPlans.Where(temp => temp.TraineeId == traineeId).ToListAsync();
             if (trainingPlan == null)
             {
                 throw new ApplicationException("Nie znaleziono planu treningowego o podanym id");
@@ -40,18 +41,18 @@ namespace TrApp.Repository
 
         public async Task<TrainingPlan> UpdateTrainingPlanAsync(TrainingPlan trainingPlan)
         {
-            TrainingPlan? trainingPlanToUpdate = await _dbContext.TrainingPlans.FindAsync(trainingPlan.TrainingPlanId);
-            if (trainingPlanToUpdate == null)
+            TrainingPlan? updateTraining = await _dbContext.TrainingPlans.FindAsync(trainingPlan.TrainingPlanId);
+            if (updateTraining == null)
             {
                 throw new ApplicationException("Nie znaleziono planu treningowego o podanym id");
             }
 
-            trainingPlanToUpdate.TrainingPlanName = trainingPlan.TrainingPlanName;
-            trainingPlanToUpdate.TrainingPlanStatus = trainingPlan.TrainingPlanStatus;
-            trainingPlanToUpdate.TrainingType = trainingPlan.TrainingType;
-            trainingPlanToUpdate.Exercises = trainingPlan.Exercises;
+            updateTraining.TrainingPlanName = trainingPlan.TrainingPlanName;
+            updateTraining.TrainingPlanStatus = trainingPlan.TrainingPlanStatus;
+            updateTraining.TrainingType = trainingPlan.TrainingType;
+            updateTraining.Exercises = trainingPlan.Exercises;
             await _dbContext.SaveChangesAsync();
-            return trainingPlanToUpdate;
+            return updateTraining;
         }
     }
 }

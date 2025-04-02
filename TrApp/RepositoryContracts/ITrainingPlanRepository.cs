@@ -7,6 +7,6 @@ namespace TrApp.RepositoryContracts
         public Task<TrainingPlan> AddTrainingPlanAsync(TrainingPlan trainingPlan);
         public Task<bool> DeleteTrainingPlanAsync(Guid trainingPlanId);
         public Task<TrainingPlan> UpdateTrainingPlanAsync(TrainingPlan trainingPlan);
-        public Task<TrainingPlan> GetTrainingPlanByIdAsync(Guid trainingPlanId);
+        public Task<List<TrainingPlan>> GetTrainingPlanByTraineeIdAsync(Guid traineeId);
     }
 }

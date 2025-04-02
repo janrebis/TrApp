@@ -26,25 +26,26 @@ namespace TrApp.Services
                 trainingPlan.AddExercise(exercise);
             }
 
-            return trainingPlan.Build();
-
-           
+            return trainingPlan.Build();    
             
         }
 
-        public Task<bool> DeleteTrainingPlan()
+        public async Task<bool> DeleteTrainingPlan(Guid trainingPlanId)
         {
-            throw new NotImplementedException();
+            var result = await _trainingPlanRepository.DeleteTrainingPlanAsync(trainingPlanId);
+            return result;
         }
 
-        public Task<TrainingPlan> GetTrainingPlanByClientId(Guid ClientId)
+        public async Task<List<TrainingPlan>> GetTrainingPlanByTraineeId(Guid traineeId)
         {
-            throw new NotImplementedException();
+           var result = await _trainingPlanRepository.GetTrainingPlanByTraineeIdAsync(traineeId);
+            return result;
         }
 
-        public Task<TrainingPlan> UpdateTrainingPlan()
+        public async Task<TrainingPlan> UpdateTrainingPlan(TrainingPlan trainingPlan)
         {
-            throw new NotImplementedException();
+            var result = await _trainingPlanRepository.UpdateTrainingPlanAsync(trainingPlan);
+            return result;
         }
     }
 }
