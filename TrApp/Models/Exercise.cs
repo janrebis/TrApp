@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace TrApp.Models
@@ -15,6 +16,8 @@ namespace TrApp.Models
         public TimeSpan? ExerciseDuration { get; set; }
         public int? Weight { get; set; }
 
-        public Guid TrainerId { get; set; }
+        public Guid TrainingPlanId { get; set; }
+        [ForeignKey("TrainingPlanId")]
+        public TrainingPlan? TrainingPlan { get; set; }
     }
 }

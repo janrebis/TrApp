@@ -37,9 +37,9 @@ namespace TrApp.Repository
             return exercise;
         }
 
-        public async Task<List<Exercise>> GetAllExercises(Guid trainerId)
+        public async Task<List<Exercise>> GetAllExercises(Guid trainingPlanId)
         {
-            List<Exercise> result = await _dbContext.Exercises.Where(temp => temp.TrainerId == trainerId).ToListAsync();
+            List<Exercise> result = await _dbContext.Exercises.Where(temp => temp.TrainingPlanId == trainingPlanId).ToListAsync();
             return result;
         }
 

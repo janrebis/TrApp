@@ -12,14 +12,18 @@ namespace TrApp.Services
         {
             _traineeRepository = traineeRepository;
         }
-        public async Task<Trainee> CreateTraineeAsync(string name, int age)
+        public async Task<Trainee> CreateTraineeAsync(string name, int age, Guid trainerId)
         {
+            if (trainerId == Guid.Empty) { throw new ArgumentException("Trainer id cannot be blank"); }
+            if (name == null) { throw new ArgumentNullException("Name of trainne is required"); }
+
             Trainee trainee = new Trainee
             {
                 Id = Guid.NewGuid(),
                 Name = name,
                 Age = age,
                 CreatedAt = DateTime.Now,
+                TrainerId = trainerId
             };
 
             await _traineeRepository.AddClientAsync(trainee);

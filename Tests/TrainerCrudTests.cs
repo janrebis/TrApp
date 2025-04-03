@@ -10,13 +10,13 @@ using TrApp.Services;
 
 namespace Tests
 {
-    public class TrainerRepositoryTests
+    public class TrainerCrudTests
     {
         private readonly ITrainerRepository _trainerRepository;
         private readonly ITrainerService _trainerService;
         private readonly IFixture _fixture;
 
-        public TrainerRepositoryTests()
+        public TrainerCrudTests()
         {
             _fixture = new Fixture();
             var trainersInitialData = new List<Trainer>();

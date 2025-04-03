@@ -8,6 +8,12 @@ namespace TrApp.Repository
     public class TraineeRepository : ITraineeRepository
     {
         private readonly ApplicationDbContext _dbContext;
+
+        public TraineeRepository(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public async Task<Trainee> AddClientAsync(Trainee trainee)
         {
             await _dbContext.Trainees.AddAsync(trainee);

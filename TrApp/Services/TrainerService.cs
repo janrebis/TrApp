@@ -10,7 +10,7 @@ namespace TrApp.Services
     {
         private readonly ITrainerRepository _trainerRepository;
 
-        public TrainerService(ITrainerRepository trainerRepository, UserManager<IdentityUser> userManager)
+        public TrainerService(ITrainerRepository trainerRepository)
         {
             _trainerRepository = trainerRepository;
         }

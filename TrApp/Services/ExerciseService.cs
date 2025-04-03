@@ -14,12 +14,12 @@ namespace TrApp.Services
             _exerciseRepository = exerciseRepository;
         }
 
-        public async Task<Exercise> CreateExersiceAsync(Guid trainerId, string name, string? description, int? sets, int? repetitions, int? weight, TimeSpan? exerciseDuration)
+        public async Task<Exercise> CreateExersiceAsync(Guid trainingPlanId, string name, string? description, int? sets, int? repetitions, int? weight, TimeSpan? exerciseDuration)
         {
             Exercise exercise = new Exercise
             {
                 ExerciseId = Guid.NewGuid(),
-                TrainerId = trainerId,
+                TrainingPlanId = trainingPlanId,
                 Name = name,
                 Description = description,
                 Sets = sets,
