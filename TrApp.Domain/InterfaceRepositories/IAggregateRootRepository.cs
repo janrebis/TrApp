@@ -7,10 +7,10 @@ using TrApp.Domain.Entities.AggregateRoots;
 
 namespace TrApp.Domain.InterfaceRepositories
 {
-    public interface ITrainerRepository
+    public interface IAggregateRootRepository<T> where T : class, IAggregateRoot
     {
-        public Task<Trainer> FindByIdAsync(Guid Trainerid);
-        public Task SaveAsync(Trainer trainer);
-        public Task RemoveAsync(Guid TrainerId);
+        Task<T> FindByIdAsync(Guid id);
+        Task SaveAsync(T entity);
+        Task RemoveAsync(Guid id);
     }
 }

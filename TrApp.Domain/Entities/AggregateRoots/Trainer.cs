@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
+using TrApp.Domain.Entities.DTO;
 using TrApp.Domain.Entities.Validators;
 using TrApp.Domain.Exception;
 using TrApp.Models;
@@ -43,11 +44,23 @@ namespace TrApp.Domain.Entities.AggregateRoots
             _trainees.Remove(traineeToDelete);
         }
 
-        public Trainee GetTraineeById(Guid traineeId)
+        public TraineeDto GetTraineeData(Guid traineeId)
+        {
+            var trainee = GetTraineeById(traineeId);
+            TraineeDto traineeDto = new TraineeDto(traineeId, trainee.Name, trainee.Age);
+            return traineeDto;
+        }
+
+        private Trainee GetTraineeById(Guid traineeId)
         {
             var trainee = _trainees.FirstOrDefault(temp => temp.TraineeId == traineeId);
             if (trainee == null) throw new InvalidOperationException("Trainee not found.");
             return trainee;
+        }
+
+        public IEnumerable<TraineeDto> GetAllTrainees()
+        {
+            return _trainees.Select(t => new TraineeDto(t.TraineeId, t.Name, t.Age));
         }
 
     }
