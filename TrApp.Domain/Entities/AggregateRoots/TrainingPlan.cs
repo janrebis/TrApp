@@ -15,6 +15,7 @@ namespace TrApp.Domain.Entities.AggregateRoots
         public Guid TrainingPlanId { get; private set; }
         [Required]
         public string Name { get; private set; }
+        public Guid TraineeId { get; private set; }
         public TrainingType? TrainingType { get; private set; }
         private List<Exercise> _exercises { get; } = new List<Exercise>();
         public IReadOnlyCollection<Exercise> Exercises => _exercises.AsReadOnly();
@@ -43,6 +44,7 @@ namespace TrApp.Domain.Entities.AggregateRoots
             CreationDate = DateTime.UtcNow;
         }
 
+        public void AddTrainingPlanToId(Guid traineeId) { TraineeId = traineeId; }
         public void ChangeTrainingType(TrainingType trainingType) { TrainingType = trainingType; }
         public void ChangeStatus(TrainingPlanStatus trainingPlanStatus)  {Status = trainingPlanStatus;}
         public void UpdateNotes(string? notes) { Notes = notes; }

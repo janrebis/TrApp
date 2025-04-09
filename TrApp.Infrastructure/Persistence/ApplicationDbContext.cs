@@ -18,31 +18,45 @@ namespace TrApp.Infrastructure.Persistence
         public virtual DbSet<Exercise> Exercises { get; set; }
         public virtual DbSet<TrainingPlan> TrainingPlans { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.Entity<Trainer>()
-                .HasMany<Trainee>("_trainees")
-                .WithOne(te => te.Trainer)  
-                .HasForeignKey(te => te.TrainerId) 
-                .OnDelete(DeleteBehavior.Cascade); 
 
-            builder.Entity<Trainer>()
-                .HasKey(tr => tr.TrainerId);
+            modelBuilder.Entity<Trainer>(builder =>
+            {
+                builder.HasKey(t => t.TrainerId);
 
-            builder.Entity<Trainee>()
-                .HasKey(te => te.TraineeId);
+                builder.Ignore(t => t.Trainees);
 
-            builder.Entity<TrainingPlan>()
+                builder
+                    .HasMany<Trainee>("_trainees") // <- Powiedz EF, że to jest kolekcja z prywatnym polem
+                    .WithOne(t => t.Trainer)
+                    .HasForeignKey(t => t.TrainerId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                builder.Navigation("_trainees").UsePropertyAccessMode(PropertyAccessMode.Field);
+            });
+
+            modelBuilder.Entity<Trainee>(builder =>
+            {
+                builder.HasKey(t => t.TraineeId);
+            });
+        
+
+        modelBuilder.Entity<TrainingPlan>()
                 .HasMany<Exercise>("_exercises")
                 .WithOne(e => e.TrainingPlan)
                 .HasForeignKey(e => e.TrainingPlanId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<TrainingPlan>()
+            modelBuilder.Entity<TrainingPlan>()
                 .HasKey(tp => tp.TrainingPlanId);
 
-            builder.Entity<Exercise>()
+            modelBuilder.Entity<Exercise>()
                 .HasKey(e => e.ExerciseId);
+
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserToken<string>>().HasNoKey();
         } 
     }
 }

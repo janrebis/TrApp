@@ -77,7 +77,7 @@ namespace Tests
                 trainer.UpdateTrainee(traineeId, "Anna Kowalska", 26);
 
                 // Assert
-                var updatedTrainee = trainer.GetTraineeById(traineeId);
+                var updatedTrainee = trainer.GetTraineeData(traineeId);
                 updatedTrainee.Name.Should().Be("Anna Kowalska");
                 updatedTrainee.Age.Should().Be(26);
             }
@@ -130,7 +130,7 @@ namespace Tests
                 var traineeId = trainer.Trainees.First().TraineeId;
 
                 // Act
-                var trainee = trainer.GetTraineeById(traineeId);
+                var trainee = trainer.GetTraineeData(traineeId);
 
                 // Assert
                 trainee.Should().NotBeNull();
