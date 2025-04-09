@@ -11,6 +11,6 @@ namespace TrApp.Domain.InterfaceRepositories
     {
         public Task<Trainer> FindByIdAsync(Guid Trainerid);
         public Task SaveAsync(Trainer trainer);
-        public Task DeleteAsync(Guid TrainerId);
+        public Task RemoveAsync(Guid TrainerId);
     }
 }
