@@ -5,8 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using TrApp.Domain.Entities.AggregateRoots;
+<<<<<<< HEAD
 using TrApp.Domain.InterfaceRepositories;
 using TrApp.Domain.ValueObjects;
+=======
+using TrApp.Domain.Entities.DTO;
+using TrApp.Domain.InterfaceRepositories;
+>>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
 
 namespace TrApp.Application.Services
 {
@@ -22,7 +27,11 @@ namespace TrApp.Application.Services
         public async Task<Guid> AddTrainer(Guid trainerId, string name)
         {
             var trainer = new Trainer(trainerId, name);
+<<<<<<< HEAD
             await _trainerRepository.InsertAsync(trainer);
+=======
+            await _trainerRepository.SaveAsync(trainer);
+>>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
             return trainer.TrainerId;
         }
 
@@ -45,7 +54,11 @@ namespace TrApp.Application.Services
         {
             var trainer = await _trainerRepository.FindByIdAsync(trainerId);
             trainer.AddTrainee(name, age);
+<<<<<<< HEAD
             await _trainerRepository.InsertAsync(trainer);
+=======
+            await _trainerRepository.SaveAsync(trainer);
+>>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
 
         }
 
@@ -53,7 +66,11 @@ namespace TrApp.Application.Services
         {
             var trainer = await _trainerRepository.FindByIdAsync(trainerId);
             trainer.UpdateTrainee(traineeId, name, age);
+<<<<<<< HEAD
             await _trainerRepository.UpdateAsync(trainer);
+=======
+            await _trainerRepository.SaveAsync(trainer);
+>>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
         }
 
         public async Task<IEnumerable<TraineeDto>> GetAllTraineesAsync(Guid trainerId)
@@ -73,7 +90,11 @@ namespace TrApp.Application.Services
         {
             var trainer = await _trainerRepository.FindByIdAsync(trainerId);
             trainer.DeleteTrainee(traineeId);
+<<<<<<< HEAD
             await _trainerRepository.RemoveAsync(trainerId);
+=======
+            await _trainerRepository.SaveAsync(trainer);
+>>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
         }
         #endregion
     }

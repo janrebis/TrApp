@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.InteropServices;
+using TrApp.Domain.Entities.DTO;
 using TrApp.Domain.Entities.Validators;
 using TrApp.Domain.Exception;
 using TrApp.Domain.ValueObjects;
