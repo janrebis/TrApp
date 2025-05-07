@@ -40,19 +40,25 @@ namespace TrApp.Infrastructure.Persistence
             {
                 builder.HasKey(t => t.TraineeId);
             });
-        
+            modelBuilder.Entity<TrainingPlan>(builder =>
+            {
+                builder.HasKey(tp => tp.TrainingPlanId);
 
-        modelBuilder.Entity<TrainingPlan>()
-                .HasMany<Exercise>("_exercises")
-                .WithOne(e => e.TrainingPlan)
-                .HasForeignKey(e => e.TrainingPlanId)
-                .OnDelete(DeleteBehavior.Cascade);
+                // Configure the relationship using the private field
+                builder.HasMany(tp => tp.Exercises)
+                    .WithOne(e => e.TrainingPlan)
+                    .HasForeignKey(e => e.TrainingPlanId)
+                    .IsRequired()
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
-            modelBuilder.Entity<TrainingPlan>()
-                .HasKey(tp => tp.TrainingPlanId);
+            modelBuilder.Entity<Exercise>(builder =>
+            {
+                builder.HasKey(e => e.ExerciseId);
 
-            modelBuilder.Entity<Exercise>()
-                .HasKey(e => e.ExerciseId);
+                // Explicitly ignore any shadow properties that might try to creep in
+                builder.Ignore("TrainingPlanId1");
+            });
 
             modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
             modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();

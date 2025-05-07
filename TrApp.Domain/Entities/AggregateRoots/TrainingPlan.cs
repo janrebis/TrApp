@@ -63,7 +63,7 @@ namespace TrApp.Domain.Entities.AggregateRoots
         public void AddExercise(ExerciseData data)
         {
             ExerciseValidator.ValidateExerciseData(data);
-            Exercise newExercise = new Exercise(data.Name, data.Description, data.Sets, data.Repetitions, data.ExerciseDuration, data.Weight, data.WeightUnit);
+            Exercise newExercise = new Exercise(data.Name, data.Description, data.Sets, data.Repetitions, data.ExerciseDuration, data.Weight, data.WeightUnit, TrainingPlanId);
             _exercises.Add(newExercise);
         }
 

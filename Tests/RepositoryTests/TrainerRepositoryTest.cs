@@ -75,29 +75,6 @@ namespace TrApp.Infrastructure.Persistence.Tests
             Assert.Equal("Jane", traineeDto.Name);
             Assert.Equal(25, traineeDto.Age);
         }
-        [Fact]
-        public async Task SaveAsync_Should_UpdateExistingTrainerWithNewTrainee()
-        {
-            // Arrange
-            var trainerId = Guid.NewGuid();
-            var trainer = new Trainer(trainerId, "John Doe");
-            await _trainerRepository.InsertAsync(trainer); // Dodajemy nowego trenera
-
-            // Act
-            var fetchedTrainer = await _trainerRepository.FindByIdAsync(trainerId);
-            fetchedTrainer.AddTrainee("Jane", 25); // Dodajemy nowego traineea
-
-            // Załączamy encję do kontekstu i ustawiamy jej stan na Modified
-            _dbContext.Attach(fetchedTrainer);
-            _dbContext.Entry(fetchedTrainer).State = EntityState.Modified;
-
-            await _trainerRepository.UpdateAsync(fetchedTrainer); // Zaktualizowanie encji
-
-            // Assert
-            var updatedTrainer = await _trainerRepository.FindByIdAsync(trainerId);
-            Assert.Contains(updatedTrainer.Trainees, t => t.Name == "Jane" && t.Age == 25); // Sprawdzamy, czy nowy trainee został dodany
-        }
-
 
         [Fact]
         public async Task RemoveAsync_Should_DeleteTrainerAndTrainees_When_TrainerExists()

@@ -18,11 +18,10 @@ namespace TrApp.Models
         public int? Repetitions { get; private set; }
         public TimeSpan? ExerciseDuration { get; private set; }
         public int? Weight { get; private set; }
-        public WeightUnit? WeightUnit { get; private set; } 
-        public Guid TrainingPlanId { get; private set; }
-        [Required]
+        public WeightUnit? WeightUnit { get; private set; }
+        public Guid TrainingPlanId { get; set; }
         public TrainingPlan TrainingPlan { get; private set; }
-        public Exercise(string name, string? description, int? sets, int? repetitions, TimeSpan? exerciseDuration, int? weight, WeightUnit? weightUnit)
+        public Exercise(string name, string? description, int? sets, int? repetitions, TimeSpan? exerciseDuration, int? weight, WeightUnit? weightUnit, Guid trainingPlanId)
         {
             ExerciseId = Guid.NewGuid();
             ExerciseValidator.EnsureNonNegative(sets, nameof(sets));
@@ -36,6 +35,7 @@ namespace TrApp.Models
             ExerciseDuration = exerciseDuration;
             Weight = weight;
             WeightUnit = weightUnit;
+            TrainingPlanId= trainingPlanId;
         }
 
         internal void UpdateDescription(string? description) => Description = description;
