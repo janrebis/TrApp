@@ -8,15 +8,15 @@ namespace TrApp.Domain.Entities.DTO
 {
     public class TraineeDto
     {
-        private Guid traineeId;
-        private string name;
-        private int? age;
+        public Guid TraineeId { get; private set; }
+        public string Name { get; set; }
+        public int? Age {  get; set; }
 
         public TraineeDto(Guid traineeId, string name, int? age)
         {
-            this.traineeId = traineeId;
-            this.name = name;
-            this.age = age;
+            TraineeId = traineeId;
+            Name = name;
+            Age = age;
         }
     }
 }

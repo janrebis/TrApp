@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
-=======
->>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
 using TrApp.Domain.Entities.AggregateRoots;
 using TrApp.Domain.InterfaceRepositories;
 
@@ -20,7 +17,6 @@ namespace TrApp.Infrastructure.Persistence.Repositories
         {
             _dbContext = dbContext;
         }
-<<<<<<< HEAD
         public async Task InsertAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
@@ -40,14 +36,12 @@ namespace TrApp.Infrastructure.Persistence.Repositories
         }
 
 
-=======
         public virtual async Task SaveAsync(T entity)
         {
             _dbContext.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
 
->>>>>>> 879c5d964768c79cc6b804e81dc2b8f3ef9858b4
         public virtual async Task RemoveAsync(Guid id)
         {
             var entity = await FindByIdAsync(id); 
